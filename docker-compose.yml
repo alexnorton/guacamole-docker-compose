@@ -9,6 +9,13 @@ services:
       - GUACD_HOSTNAME=guacd
       - GUACAMOLE_HOME=/config
     volumes:
-      - ./config:/config
+      - ./config/guacamole.properties:/config/guacamole.properties
+      - ./config/user-mapping.xml:/config/user-mapping.xml
   guacd:
     image: guacamole/guacd
+  desktop:
+    build: desktop
+    cap_add:
+      - SYS_ADMIN
+    volumes:
+      - ./data:/home/alpine
